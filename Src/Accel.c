@@ -79,9 +79,8 @@ int16_t buffer[3] = {0};
 
  xtemp = XGf + xdata;
  ytemp = YGf + ydata;
-
-RP_data.aRoll = XGf * (1 - KOEF_COMPL) + xdata*KOEF_COMPL;
-RP_data.aPitch = YGf * (1-KOEF_COMPL) + ydata*KOEF_COMPL;
+ xval= XGf * (1 - KOEF_COMPL) + xdata*KOEF_COMPL;
+yval = YGf * (1-KOEF_COMPL) + ydata*KOEF_COMPL;
 }
 
 void ReadGyro(void)

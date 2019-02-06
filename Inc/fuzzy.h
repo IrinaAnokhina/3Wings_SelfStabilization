@@ -46,7 +46,7 @@ double mu(int8_t x, int8_t A);
 void addrule(int8_t fe, op_type op, int8_t fde, int8_t z);
 
 
-double getFuzzyConclusion(int8_t e, int8_t de);
+float getFuzzyConclusion(int8_t e, int8_t de);
 
 void Fuzzy_Init();
 

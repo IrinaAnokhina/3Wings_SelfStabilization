@@ -64,6 +64,8 @@ extern uint8_t flag;
 extern int16_t xval, yval, zval;
 extern uint16_t val1, val2, val3, val;
 extern int16_t XGf, YGf, ZGf;
+
+extern int16_t dMThX, dMThY;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -236,12 +238,12 @@ val = 0;
 	else
 		val = 1500;
 
-	val1 = val2 = val3 = val;;
+	val1 = val2 = val3 = val;
 
-	if(XGf != 0)
+	if(dMThX != 0)
 	{
-		val1 += XGf * 5;
-		val2 += (-1 * XGf) * 5;
+		val1 += dMThX * 5;
+		val2 += (-1 *dMThX)*5;
 	}
 	if(YGf != 0)
 	{

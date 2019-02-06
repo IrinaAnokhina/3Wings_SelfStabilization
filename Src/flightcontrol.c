@@ -6,41 +6,31 @@
  */
 
 #include"flightcontrol.h"
+#include"Accel.h"
+#include"fuzzy.h"
 
-_acRoll = 0;
+extern int16_t dMThX, dMThY;
+extern int16_t xval, yval, zval;
 
 void selfStabilizing() {
     //
     //TODO:
-    int16_t _iRollError = (int16_t)((_acRoll - RP_Data.aRoll) * 8);  //
+    int16_t _iRollError = (int16_t)((acRoll - xval) * 8);  // 125/8 = 15.6 degree = max
+    int16_t _iPitchError = (int16_t)((acPitch - yval) * 8);  // 125/8 = 15.6 degree = max
     //
     int8_t iRollError = constrain(_iRollError, -125, 125);
-    int8_t iDeltaError = constrain(iRollError - iprevRollError, -125, 125);
+    int8_t iDeltaRError = constrain(iRollError - iprevRollError, -125, 125);
+    int8_t iPitchError = constrain(_iPitchError, -125, 125);
+    int8_t iDeltaPError = constrain(iPitchError - iprevPitchError, -125, 125);
+
     //
     iprevRollError = iRollError;
-
+    iprevPitchError = iPitchError;
     //
-    double dMTh = getFuzzyConclusion(iRollError, iDeltaError) * 16;  // 16 = 2000/125 - максимальное исправление в 1000 при 125
-
+     dMThX = getFuzzyConclusion(iRollError, iDeltaRError) * 90 / 125; //
+     dMThY = getFuzzyConclusion(iPitchError, iDeltaPError) * 90 / 125;
+    //dMTh = constrain(dMTh, 0, 2000);
     //
     //
-    int16_t iPart = (int16_t)(dMTh * 0.5);
-    lmSpeed = stallSpeed - iPart;
-    rmSpeed = stallSpeed + iPart;
 
-    // проверка для невылета за максимальный диапазон
-    if (lmSpeed > BLDC_MAX_PWM) {
-        int16_t _d = lmSpeed - BLDC_MAX_PWM;
-        lmSpeed = BLDC_MAX_PWM;
-        rmSpeed -= _d;
-    }
-    if (rmSpeed > BLDC_MAX_PWM) {
-        int16_t _d = rmSpeed - BLDC_MAX_PWM;
-        rmSpeed = BLDC_MAX_PWM;
-        lmSpeed -= _d;
-    }
-
-    char msg[40];
-    uint16_t len = sprintf(msg, "iMTh: %i iRollError:%i lmSpeed:%i rmSpeed:%i  \r\n", (int16_t)(floor(dMTh)), (int16_t)(floor(iRollError)), lmSpeed, rmSpeed);
-    HAL_UART_Transmit(&huart1, (uint8_t *)msg, len, HAL_MAX_DELAY);
 }

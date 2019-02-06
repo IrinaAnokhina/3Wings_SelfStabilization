@@ -19,7 +19,7 @@ void addrule(int8_t fe, op_type op, int8_t fde, int8_t z) {
     numofrules++;
 }
 
-double getFuzzyConclusion(int8_t e, int8_t de) {
+float getFuzzyConclusion(int8_t e, int8_t de) {
     double summ_alpha_c = 0, summ_alpha = 0;
     //
     for (int i = 0; i < (int)(numofrules); i++) {

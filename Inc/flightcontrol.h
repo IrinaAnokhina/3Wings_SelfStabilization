@@ -12,9 +12,10 @@
 
 #define constrain(amt, low, high) ((amt) < (low) ? (low) : ((amt) > (high) ? (high) : (amt)))
 
-int8_t iprevRollError;
-float _acPitch;
-float _acRoll;
+int16_t iprevRollError;
+int16_t iprevPitchError;
+float acPitch;
+float acRoll;
 
 
 void FC_Init();

@@ -21,7 +21,7 @@ typedef struct  {
     float aYaw;//    Z-data
 } tsRP_Data;
 
-
+tsRP_Data RP_Data;
 void Accel_ini();
 void Accel_ReadAcc(void);
 void ReadGyro();

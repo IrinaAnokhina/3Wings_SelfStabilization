@@ -49,6 +49,8 @@
 #include"Accel.h"
 #include"ssd1306.h"
 #include"fonts.h"
+#include"flightcontrol.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,6 +80,8 @@ HAL_StatusTypeDef status;
  int fGX_Cal, fGY_Cal, fGZ_Cal;
 int16_t YGf, XGf, ZGf;
 int16_t YG, XG, ZG;
+
+int16_t dMThX, dMThY;
 unsigned char str[7];
  uint8_t flag;
  uint16_t val1, val2, val3, val;
@@ -139,6 +143,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start_IT(&htim4);
 XGf = YGf = ZGf = 0;
+Fuzzy_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,8 +155,7 @@ XGf = YGf = ZGf = 0;
 	  flag = 0;
 		  ReadGyro();
 		  Accel_ReadAcc();
-		  xval = RP_data.aRoll;
-		  yval = RP_Data.aPitch;
+		  selfStabilizing();
 		  convertToChar(xval);
 		 SSD1306_GotoXY(0, 20);
 		 SSD1306_Puts(str, &Font_7x10, SSD1306_COLOR_WHITE);
