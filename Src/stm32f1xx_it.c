@@ -242,13 +242,16 @@ val = 0;
 
 	if(dMThX != 0)
 	{
-		val1 += dMThX * 5;
-		val2 += (-1 *dMThX)*5;
+		//val1 += (-1 * dMThX) * 5;
+
+		val2 += -dMThX *0.5 *5;
+		val3 += -dMThX * 0.5 * 5;
 	}
-	if(YGf != 0)
+	if(dMThY != 0)
 	{
-		val2 += YGf * 5;
-		val3 += (-1 * YGf) * 5;
+		val3 += dMThY*(sqrt(3)/2) * 5;
+		val2 += -1* dMThY* (sqrt(3)/2) * 5;
+		val1 += dMThY * 5;
 	}
 	if(val1 > 2000)
 		val1 = 2000;

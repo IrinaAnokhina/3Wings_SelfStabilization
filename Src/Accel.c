@@ -97,23 +97,16 @@ int16_t buffer[3] = {0};
  XG = (xGyro - fGX_Cal);
  YG = (yGyro - fGY_Cal);
  ZG = (zGyro - fGZ_Cal);
- /*if((XG < 20 && XG > 0)|| (XG > -20 && XG < 0))
-	 XGf += 0;
- else*/
+
 	 XGf += XG/65.5 * 0.1;
-/* if((YG < 20 && YG > 0)|| (YG > -20 && YG < 0))
-	 YGf += 0;
- else*/
+
 	 YGf += YG/65.5 * 0.1;
- /*if((ZG < 20 && ZG > 0)|| (ZG > -20 && ZG < 0))
-	 ZGf += 0;
- else*/
+
 	 ZGf += ZG/65.5* 0.1;
 }
 
 void GyroCalibrate()
 {
-	//int16_t Gyrodata[6];
 	  uint16_t iNumCM = 10000;
 	  for (int i = 0; i < iNumCM ; i++)
 	  {
@@ -121,9 +114,7 @@ void GyroCalibrate()
 	    fGX_Cal += xGyro;
 	    fGY_Cal += yGyro;
 	    fGZ_Cal += zGyro;
-	    //HAL_Delay(3);
 	  }
-	 //  isinitialized = 1;
 }
 
 void deriveGyro()
