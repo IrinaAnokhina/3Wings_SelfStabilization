@@ -14,9 +14,10 @@
 
 int16_t iprevRollError;
 int16_t iprevPitchError;
+int16_t iprevYawError;
 float acPitch;
 float acRoll;
-
+float acYaw;
 
 void FC_Init();
 void FlightControl();

@@ -81,7 +81,7 @@ HAL_StatusTypeDef status;
 int16_t YGf, XGf, ZGf;
 int16_t YG, XG, ZG;
 
-int16_t dMThX, dMThY;
+int16_t dMThX, dMThY, dMThZ;
 unsigned char str[7];
  uint8_t flag;
  uint16_t val1, val2, val3, val;

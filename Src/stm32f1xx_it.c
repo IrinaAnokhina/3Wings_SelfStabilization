@@ -65,7 +65,7 @@ extern int16_t xval, yval, zval;
 extern uint16_t val1, val2, val3, val;
 extern int16_t XGf, YGf, ZGf;
 
-extern int16_t dMThX, dMThY;
+extern int16_t dMThX, dMThY, dMThZ;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -233,8 +233,8 @@ void TIM3_IRQHandler(void)
 	val2 = xval/40 + 1500;
 	val3 = zval/40 + 1500;*/
 val = 0;
-	if(ZGf != 0)
-			val = ZGf*5 + 1500;
+	if(dMThZ != 0)
+			val = dMThZ*5 + 1500;
 	else
 		val = 1500;
 
@@ -244,14 +244,14 @@ val = 0;
 	{
 		//val1 += (-1 * dMThX) * 5;
 
-		val2 += -dMThX *0.5 *5;
-		val3 += -dMThX * 0.5 * 5;
+		val2 += dMThX *(sqrt(3)/2) *5;
+		val3 += -dMThX * 5;
 	}
 	if(dMThY != 0)
 	{
 		val3 += dMThY*(sqrt(3)/2) * 5;
-		val2 += -1* dMThY* (sqrt(3)/2) * 5;
-		val1 += dMThY * 5;
+		val1 += -1* dMThY* (sqrt(3)/2) * 5;
+		//val1 += dMThY * 5;
 	}
 	if(val1 > 2000)
 		val1 = 2000;

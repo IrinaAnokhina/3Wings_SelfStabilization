@@ -75,12 +75,12 @@ int16_t buffer[3] = {0};
  zval = buffer[2];*/
  ydata = atan2(buffer[1], sqrt(pow(buffer[0], 2) + pow(buffer[2], 2))) * R2DEG;
  xdata = atan2(buffer[0], sqrt(pow(buffer[1], 2) + pow(buffer[2], 2))) * R2DEG;
- zdata = buffer[2];
-
+ //zdata = ((int16_t)(buffer[2]/ R2DEG)) % 180;
  xtemp = XGf + xdata;
  ytemp = YGf + ydata;
  xval= XGf * (1 - KOEF_COMPL) + xdata*KOEF_COMPL;
 yval = YGf * (1-KOEF_COMPL) + ydata*KOEF_COMPL;
+zval = ZGf * (1-KOEF_COMPL);
 }
 
 void ReadGyro(void)
