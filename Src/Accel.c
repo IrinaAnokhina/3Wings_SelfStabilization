@@ -98,11 +98,11 @@ int16_t buffer[3] = {0};
  YG = (yGyro - fGY_Cal);
  ZG = (zGyro - fGZ_Cal);
 
-	 XGf += XG/65.5 * 0.1;
+	 XGf += XG/65.5*0.15;
 
-	 YGf += YG/65.5 * 0.1;
+	 YGf += YG/65.5*0.15;
 
-	 ZGf += ZG/65.5* 0.1;
+	 ZGf += ZG/65.5*0.15;
 }
 
 void GyroCalibrate()

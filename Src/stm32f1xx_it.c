@@ -38,6 +38,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include"math.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -228,10 +229,6 @@ void TIM3_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM3_IRQn 0 */
 
-	/*counter++;
-	val1 = yval/40 + 1500;
-	val2 = xval/40 + 1500;
-	val3 = zval/40 + 1500;*/
 val = 0;
 	if(dMThZ != 0)
 			val = dMThZ*5 + 1500;
@@ -242,15 +239,15 @@ val = 0;
 
 	if(dMThX != 0)
 	{
-		//val1 += (-1 * dMThX) * 5;
+		val3 += (-1 * dMThX/5*4) * 5;
 
-		val2 += dMThX *(sqrt(3)/2) *5;
-		val3 += -dMThX * 5;
+		val1 += -dMThX/5/2*5;
+		val2 += dMThX/5/2 * 5;
 	}
 	if(dMThY != 0)
 	{
-		val3 += dMThY*(sqrt(3)/2) * 5;
-		val1 += -1* dMThY* (sqrt(3)/2) * 5;
+		val1 += -dMThY*0.5* 5;
+		val3 += dMThY*0.5 * 5;
 		//val1 += dMThY * 5;
 	}
 	if(val1 > 2000)
@@ -261,23 +258,23 @@ val = 0;
 		val3 = 2000;
 
 	if(val1 < TIM2->CCR1)
-		TIM2->CCR1 = TIM2->CCR1 - 5;
+		TIM2->CCR1 = TIM2->CCR1 - 1;
 	else if(val1 > TIM2->CCR1)
-		TIM2->CCR1 = TIM2->CCR1 + 5;
+		TIM2->CCR1 = TIM2->CCR1 + 1;
 	else if(val1 == TIM2->CCR1)
 	TIM2->CCR1 = val1;
 
 	if(val2 < TIM2->CCR2)
-			TIM2->CCR2 = TIM2->CCR2 - 5;
+			TIM2->CCR2 = TIM2->CCR2 - 1;
 		else if(val2 > TIM2->CCR2)
-			TIM2->CCR2 = TIM2->CCR2 + 5;
+			TIM2->CCR2 = TIM2->CCR2 + 1;
 		else
 		TIM2->CCR2 = val2;
 
 	if(val3 < TIM2->CCR3)
-				TIM2->CCR3 = TIM2->CCR3 - 5;
+				TIM2->CCR3 = TIM2->CCR3 - 1;
 			else if(val3 > TIM2->CCR3)
-				TIM2->CCR3 = TIM2->CCR3 + 5;
+				TIM2->CCR3 = TIM2->CCR3 + 1;
 			else
 			TIM2->CCR3 = val3;
 

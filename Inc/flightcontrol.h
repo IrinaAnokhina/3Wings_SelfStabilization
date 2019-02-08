@@ -15,6 +15,9 @@
 int16_t iprevRollError;
 int16_t iprevPitchError;
 int16_t iprevYawError;
+int32_t integrRError;
+int32_t integrPError;
+int32_t integrYError;
 float acPitch;
 float acRoll;
 float acYaw;
