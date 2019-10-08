@@ -1,7 +1,7 @@
-Accel.c:20:6:Accel_ini	56	static
-Accel.c:40:6:Accel_GetXYZ	32	static
-Accel.c:53:6:Gyro_GetXYZ	32	static
-Accel.c:66:6:Accel_ReadAcc	56	static
-Accel.c:86:6:ReadGyro	40	static
-Accel.c:108:6:GyroCalibrate	24	static
-Accel.c:120:6:deriveGyro	0	static
+Accel.c:20:6:Accel_ini	32	static
+Accel.c:40:6:Accel_GetXYZ	40	static
+Accel.c:53:6:Gyro_GetXYZ	40	static
+Accel.c:66:6:Accel_ReadAcc	32	static
+Accel.c:86:6:ReadGyro	24	static
+Accel.c:109:6:GyroCalibrate	16	static
+Accel.c:121:6:deriveGyro	16	static

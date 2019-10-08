@@ -11,7 +11,7 @@ extern int fGX_Cal, fGY_Cal, fGZ_Cal;
 
 extern I2C_HandleTypeDef hi2c1;
 extern HAL_StatusTypeDef status;
-extern int16_t xval, yval, zval;
+extern int8_t xval, yval, zval;
 extern int16_t xtemp, ytemp, ztemp;
 extern int16_t xdata, ydata, zdata;
 extern int16_t xGyro, yGyro, zGyro;
@@ -98,11 +98,12 @@ int16_t buffer[3] = {0};
  YG = (yGyro - fGY_Cal);
  ZG = (zGyro - fGZ_Cal);
 
-	 XGf += XG/65.5*0.15;
+ //if FS_SEL  = 1 (+-500), LSB Sensivity = 65.5, reading - 10 times per second
+	 XGf += XG/65.5/10;
 
-	 YGf += YG/65.5*0.15;
+	 YGf += YG/65.5/10;
 
-	 ZGf += ZG/65.5*0.15;
+	 ZGf += ZG/65.5/10;
 }
 
 void GyroCalibrate()

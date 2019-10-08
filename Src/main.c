@@ -50,7 +50,7 @@
 #include"ssd1306.h"
 #include"fonts.h"
 #include"flightcontrol.h"
-
+#include"Usart.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -73,14 +73,15 @@
 /* USER CODE BEGIN PV */
 uint16_t counter;
 HAL_StatusTypeDef status;
- int16_t xval, yval, zval;
+ int8_t xval, yval, zval;
  int16_t xtemp, ytemp, ztemp;
  int16_t xdata, ydata, zdata;
  int16_t xGyro, yGyro, zGyro;
  int fGX_Cal, fGY_Cal, fGZ_Cal;
 int16_t YGf, XGf, ZGf;
 int16_t YG, XG, ZG;
-
+int8_t buffer_str[22];
+char data;
 int16_t dMThX, dMThY, dMThZ;
 unsigned char str[7];
  uint8_t flag;
@@ -144,6 +145,10 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim4);
 XGf = YGf = ZGf = 0;
 Fuzzy_Init();
+
+uart_init();
+//data = "%";
+	//	  send_to_uart( data);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -156,13 +161,16 @@ Fuzzy_Init();
 		  ReadGyro();
 		  Accel_ReadAcc();
 		  selfStabilizing();
+		  write_CRC();
+		  data = buffer_str[0];
+		  send_to_uart(data);
 		  convertToChar(xval);
 		 SSD1306_GotoXY(0, 20);
 		 SSD1306_Puts(str, &Font_7x10, SSD1306_COLOR_WHITE);
 		 convertToChar(yval);
 		 SSD1306_GotoXY(80, 20);
 		 SSD1306_Puts(str, &Font_7x10, SSD1306_COLOR_WHITE);
-		 convertToChar(ZGf);
+		 convertToChar(zval);
 		 SSD1306_GotoXY(45, 30);
 		 SSD1306_Puts(str, &Font_7x10, SSD1306_COLOR_WHITE);
 		 SSD1306_UpdateScreen();

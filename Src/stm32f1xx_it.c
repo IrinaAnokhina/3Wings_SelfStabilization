@@ -231,7 +231,7 @@ void TIM3_IRQHandler(void)
 
 val = 0;
 	if(dMThZ != 0)
-			val = dMThZ*5 + 1500;
+			val = -dMThZ*5 + 1500;
 	else
 		val = 1500;
 

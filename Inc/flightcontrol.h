@@ -15,9 +15,9 @@
 int16_t iprevRollError;
 int16_t iprevPitchError;
 int16_t iprevYawError;
-int32_t integrRError;
-int32_t integrPError;
-int32_t integrYError;
+int16_t integrRError;
+int16_t integrPError;
+int16_t integrYError;
 float acPitch;
 float acRoll;
 float acYaw;
@@ -25,4 +25,5 @@ float acYaw;
 void FC_Init();
 void FlightControl();
 void selfStabilizing();
+
 #endif /* FLIGHTCONTROL_H_ */
